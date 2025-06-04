@@ -1,4 +1,10 @@
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.DependencyInjection;
+using universida.Data;
 var builder = WebApplication.CreateBuilder(args);
+
+builder.Services.AddDbContext<UniversidadContext>(options =>
+    options.UseSqlite(builder.Configuration.GetConnectionString("UniversidadContext") ?? throw new InvalidOperationException("Connection string 'UniversidadContext' not found.")));
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
